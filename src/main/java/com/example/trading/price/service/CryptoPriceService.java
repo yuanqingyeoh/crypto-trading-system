@@ -1,7 +1,7 @@
-package com.example.trading.service;
+package com.example.trading.price.service;
 
-import com.example.trading.model.CryptoPrice;
-import com.example.trading.repository.CryptoPriceRepository;
+import com.example.trading.price.model.CryptoPrice;
+import com.example.trading.price.repository.CryptoPriceRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +21,6 @@ public class CryptoPriceService {
     }
 
     public CryptoPrice getSymbol(String symbol) {
-        return cryptoPriceRepository.findByCryptoPair(symbol).orElseThrow(EntityNotFoundException::new);
+        return cryptoPriceRepository.findBySymbol(symbol).orElseThrow(EntityNotFoundException::new);
     }
 }

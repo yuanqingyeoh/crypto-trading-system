@@ -1,11 +1,12 @@
-package com.example.trading.resource;
+package com.example.trading.user.resource;
 
-import com.example.trading.model.Wallet;
-import com.example.trading.service.UserService;
+import com.example.trading.user.model.User;
+import com.example.trading.user.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,14 +20,19 @@ public class UserResource {
     }
 
     /**
-     * Endpoint to retrieve the user's wallet balance.
+     * Endpoint to retrieve the user's info.
      * @param userId the ID of the user
-     * @return ResponseEntity containing the wallet balance or a 404 error if the wallet doesn't exist
+     * @return ResponseEntity containing the user info
      */
-    @GetMapping("/wallet/{userId}")
-    public ResponseEntity<Wallet> getWalletBalance(@PathVariable Long userId) {
-        return userService.getWallet(userId)
-                .map(wallet -> ResponseEntity.ok(wallet))
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getuser(@PathVariable Long userId) {
+        return userService.getUser(userId)
+                .map(ResponseEntity::ok)
                 .orElseThrow(EntityNotFoundException::new);
+    }
+
+    @PostMapping("/saveUser")
+    public ResponseEntity<User> saveUser(User user) {
+        return ResponseEntity.ok(userService.saveUser(user));
     }
 }

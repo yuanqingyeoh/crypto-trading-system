@@ -1,10 +1,12 @@
-package com.example.trading.resource;
+package com.example.trading.trade.resource;
 
-import com.example.trading.model.Trade;
-import com.example.trading.service.TradeService;
+import com.example.trading.trade.dto.MakeTradeDTO;
+import com.example.trading.trade.model.Trade;
+import com.example.trading.trade.service.TradeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,4 +31,12 @@ public class TradeResource {
     public ResponseEntity<List<Trade>> getTradeHistory(@PathVariable Long userId) {
         return ResponseEntity.ok(tradeService.getTradeHistory(userId));
     }
+
+
+    @PostMapping("/makeTrade")
+    public ResponseEntity<Trade> makeTrade(MakeTradeDTO makeTradeDTO) {
+        return ResponseEntity.ok(tradeService.makeTrade(makeTradeDTO));
+    }
+
+
 }

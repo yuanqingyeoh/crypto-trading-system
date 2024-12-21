@@ -1,11 +1,16 @@
-package com.example.trading.model;
+package com.example.trading.user.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Table(name = "TB_USER")
@@ -32,10 +37,13 @@ public class User {
 
     // Additional fields like created/updated timestamps can be added
     @Column(nullable = false, updatable = false)
-    private Long createdTimestamp = System.currentTimeMillis();
+    private LocalDateTime createdTimestamp = LocalDateTime.now();
 
     @Column(nullable = false)
-    private Long updatedTimestamp = System.currentTimeMillis();
+    private LocalDateTime updatedTimestamp = LocalDateTime.now();
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<Balance> balances;
 
     // Getters and Setters
     public Long getUserId() {
@@ -86,19 +94,40 @@ public class User {
         this.isActive = isActive;
     }
 
-    public Long getCreatedTimestamp() {
+    public LocalDateTime getCreatedTimestamp() {
         return createdTimestamp;
     }
 
-    public void setCreatedTimestamp(Long createdTimestamp) {
+    public void setCreatedTimestamp(LocalDateTime createdTimestamp) {
         this.createdTimestamp = createdTimestamp;
     }
 
-    public Long getUpdatedTimestamp() {
+    public LocalDateTime getUpdatedTimestamp() {
         return updatedTimestamp;
     }
 
-    public void setUpdatedTimestamp(Long updatedTimestamp) {
+    public void setUpdatedTimestamp(LocalDateTime updatedTimestamp) {
         this.updatedTimestamp = updatedTimestamp;
+    }
+
+    public Set<Balance> getBalances() {
+        return balances;
+    }
+
+    public void setBalances(Set<Balance> balances) {
+        this.balances = balances;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", password='" + password + '\'' +
+                ", isActive=" + isActive +
+                ", balances=" + balances +
+                '}';
     }
 }

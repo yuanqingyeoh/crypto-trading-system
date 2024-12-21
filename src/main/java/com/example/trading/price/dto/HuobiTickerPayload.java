@@ -1,4 +1,4 @@
-package com.example.trading.model.dto;
+package com.example.trading.price.dto;
 
 import java.math.BigDecimal;
 import java.util.List;

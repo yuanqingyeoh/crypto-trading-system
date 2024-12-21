@@ -1,5 +1,6 @@
-package com.example.trading.model;
+package com.example.trading.trade.model;
 
+import com.example.trading.user.model.User;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

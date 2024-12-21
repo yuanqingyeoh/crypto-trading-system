@@ -1,7 +1,7 @@
-package com.example.trading.resource;
+package com.example.trading.price.resource;
 
-import com.example.trading.model.CryptoPrice;
-import com.example.trading.service.CryptoPriceService;
+import com.example.trading.price.model.CryptoPrice;
+import com.example.trading.price.service.CryptoPriceService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

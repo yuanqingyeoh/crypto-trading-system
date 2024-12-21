@@ -1,9 +1,9 @@
-package com.example.trading.service;
+package com.example.trading.price.service;
 
-import com.example.trading.model.CryptoPrice;
-import com.example.trading.model.dto.BinanceTickerPayload;
-import com.example.trading.model.dto.HuobiTickerPayload;
-import com.example.trading.repository.CryptoPriceRepository;
+import com.example.trading.price.model.CryptoPrice;
+import com.example.trading.price.dto.BinanceTickerPayload;
+import com.example.trading.price.dto.HuobiTickerPayload;
+import com.example.trading.price.repository.CryptoPriceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -61,7 +61,7 @@ public class CryptoPriceTask {
         Set<String> uniqueSymbols = binanceTickers.stream().map(BinanceTickerPayload::getSymbol).map(String::toUpperCase).collect(Collectors.toSet());
         uniqueSymbols.addAll(huobiTickerPayload.getData().stream().map(HuobiTickerPayload.HuobiTicker::getSymbol).map(String::toUpperCase).collect(Collectors.toSet()));
 
-        List<CryptoPrice> cryptoPrices = cryptoPriceRepository.findByCryptoPairIn(uniqueSymbols.stream().toList());
+        List<CryptoPrice> cryptoPrices = cryptoPriceRepository.findBySymbolIn(uniqueSymbols.stream().toList());
         List<CryptoPrice> toSave = new ArrayList<>();
 
         uniqueSymbols.forEach(symbol -> {

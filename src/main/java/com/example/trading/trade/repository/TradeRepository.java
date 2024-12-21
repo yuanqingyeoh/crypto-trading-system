@@ -1,6 +1,6 @@
-package com.example.trading.repository;
+package com.example.trading.trade.repository;
 
-import com.example.trading.model.Trade;
+import com.example.trading.trade.model.Trade;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

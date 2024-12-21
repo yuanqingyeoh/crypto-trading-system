@@ -1,4 +1,4 @@
-package com.example.trading.model;
+package com.example.trading.price.model;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
