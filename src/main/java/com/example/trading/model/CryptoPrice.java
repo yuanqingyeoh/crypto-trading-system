@@ -13,7 +13,7 @@ public class CryptoPrice {
     private Long id;
 
     @Column(nullable = false)
-    private String cryptoPair; // Example: BTCUSDT, ETHUSDT
+    private String symbol; // Example: BTCUSDT, ETHUSDT
 
     @Column(nullable = false)
     private BigDecimal bidPrice; // Used for SELL orders
@@ -24,7 +24,6 @@ public class CryptoPrice {
     @Column(nullable = false)
     private LocalDateTime lastUpdated;
 
-    // Getters and Setters
     public Long getId() {
         return id;
     }
@@ -33,12 +32,12 @@ public class CryptoPrice {
         this.id = id;
     }
 
-    public String getCryptoPair() {
-        return cryptoPair;
+    public String getSymbol() {
+        return symbol;
     }
 
-    public void setCryptoPair(String cryptoPair) {
-        this.cryptoPair = cryptoPair;
+    public void setSymbol(String cryptoPair) {
+        this.symbol = cryptoPair;
     }
 
     public BigDecimal getBidPrice() {
