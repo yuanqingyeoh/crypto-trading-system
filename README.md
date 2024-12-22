@@ -7,7 +7,7 @@ Can view available API endpoint here using the Swagger UI
 [Click here for swagger ui](http://localhost:8080/swagger-ui/index.html#/)
 
 ### Database Table
-![](image\entity_relation_diagram.png)
+![](image/entity_relation_diagram.png)
 
 TB_USER -> Store information about the user
 
