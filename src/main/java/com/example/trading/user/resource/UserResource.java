@@ -1,5 +1,6 @@
 package com.example.trading.user.resource;
 
+import com.example.trading.user.model.SaveUserDTO;
 import com.example.trading.user.model.User;
 import com.example.trading.user.service.UserService;
 import jakarta.persistence.EntityNotFoundException;
@@ -32,7 +33,7 @@ public class UserResource {
     }
 
     @PostMapping("/saveUser")
-    public ResponseEntity<User> saveUser(User user) {
-        return ResponseEntity.ok(userService.saveUser(user));
+    public ResponseEntity<User> saveUser(SaveUserDTO saveUserDTO) {
+        return ResponseEntity.ok(userService.saveUser(saveUserDTO));
     }
 }

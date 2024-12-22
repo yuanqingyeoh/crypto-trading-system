@@ -1,6 +1,7 @@
 package com.example.trading.util;
 
 import com.example.trading.user.model.Balance;
+import com.example.trading.user.model.SaveUserDTO;
 import com.example.trading.user.model.User;
 import com.example.trading.user.service.UserService;
 import org.slf4j.Logger;
@@ -28,21 +29,14 @@ public class CreateUserTask {
 
     @EventListener(ApplicationReadyEvent.class)
     public void doSomethingAfterStartup() {
-        User newUser = new User();
-        newUser.setEmail("test@gmail.com");
-        newUser.setFullName("Test user");
-        newUser.setUsername("test_username");
-        newUser.setIsActive(true);
-        newUser.setPassword("password");
+        SaveUserDTO saveUserDTO = new SaveUserDTO(
+                "test_username",
+                "test@gmail.com",
+                "Test user",
+                "password",
+                true);
 
-        User saved = userService.saveUser(newUser);
+        User saved = userService.saveUser(saveUserDTO);
         LOGGER.info("Saved User: {}", saved);
-
-        Balance balance = new Balance();
-        balance.setCoin("USDT");
-        balance.setBalance(new BigDecimal(50000));
-        balance.setUser(saved);
-
-        userService.saveBalances(Collections.singletonList(balance));
     }
 }
