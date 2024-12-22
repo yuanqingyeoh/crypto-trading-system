@@ -31,14 +31,21 @@ public class UserService {
     }
 
     /**
-     * Retrieves the wallet balance for a specific user.
+     * Retrieves the user info for the user id
+     *
      * @param   userId the ID of the user
-     * @return  an Optional containing the wallet if it exists, otherwise empty
+     * @return  an Optional containing the user info if it exists, otherwise empty
      */
     public Optional<User> getUser(Long userId) {
         return userRepository.findById(userId);
     }
 
+    /**
+     * Save user to DB
+     *
+     * @param saveUserDTO   DTO having the user information to be updated. Username is not updatable.
+     * @return              saved user
+     */
     public User saveUser(SaveUserDTO saveUserDTO){
         Optional<User> userOpt = userRepository.findByUsername(saveUserDTO.getUsername());
         User toSave = new User();
@@ -83,6 +90,12 @@ public class UserService {
         return toSave;
     }
 
+    /**
+     * Save user balances
+     *
+     * @param balances  balances to be save
+     * @return          saved balance
+     */
     public List<Balance> saveBalances(List<Balance> balances) {
         return this.balanceRepository.saveAll(balances);
     }

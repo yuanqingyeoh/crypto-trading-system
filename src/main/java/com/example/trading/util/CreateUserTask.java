@@ -1,6 +1,5 @@
 package com.example.trading.util;
 
-import com.example.trading.user.model.Balance;
 import com.example.trading.user.model.SaveUserDTO;
 import com.example.trading.user.model.User;
 import com.example.trading.user.service.UserService;
@@ -10,8 +9,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
-import java.util.Collections;
 
 /**
  * This class is just a class to generate testing data on startup.

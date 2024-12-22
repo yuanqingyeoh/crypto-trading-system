@@ -39,18 +39,29 @@ public class CryptoPriceTask {
         this.cryptoPriceRepository = cryptoPriceRepository;
     }
 
-    public List<BinanceTickerPayload> binanceCall() {
+    /**
+     * Get ticker data from Binance
+     * @return  ticker data payload from Binance
+     */
+    private List<BinanceTickerPayload> binanceCall() {
         List<BinanceTickerPayload> response = Arrays.stream(this.binanceRestClient.get().uri("ticker/bookTicker").retrieve().body(BinanceTickerPayload[].class)).toList();
         LOGGER.trace(response.toString());
         return response;
     }
 
-    public HuobiTickerPayload huobiCall() {
+    /**
+     * Get ticker data from Huobi
+     * @return  ticker data payload from Huobi
+     */
+    private HuobiTickerPayload huobiCall() {
         HuobiTickerPayload response = this.huobiRestClient.get().uri("market/tickers").retrieve().body(HuobiTickerPayload.class);
         LOGGER.trace(response.toString());
         return response;
     }
 
+    /**
+     * Scheduled task that execute every 10 seconds to fetch data from Binance and Huobi to aggregate latest price
+     */
     @Scheduled(fixedRate = 10000)
     public void fetchData() {
         List<BinanceTickerPayload> binanceTickers = binanceCall();

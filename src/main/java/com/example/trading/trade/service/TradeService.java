@@ -35,11 +35,23 @@ public class TradeService {
         this.cryptoPriceService = cryptoPriceService;
     }
 
+    /**
+     * Get trade history by userId
+     *
+     * @param userId    The userId to search
+     * @return          List of trade made by the user
+     */
     public List<Trade> getTradeHistory(Long userId) {
         return tradeRepository.findByUserUserId(userId);
     }
 
 
+    /**
+     * Make trade
+     *
+     * @param makeTradeDTO      DTO containing trade information
+     * @return                  Trade made
+     */
     public Trade makeTrade(MakeTradeDTO makeTradeDTO) {
         Optional<User> userOpt = this.userService.getUser(makeTradeDTO.getUserId());
 
