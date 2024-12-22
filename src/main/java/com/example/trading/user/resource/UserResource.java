@@ -32,7 +32,7 @@ public class UserResource {
     public ResponseEntity<User> getUser(@PathVariable Long userId) {
         return userService.getUser(userId)
                 .map(ResponseEntity::ok)
-                .orElseThrow(EntityNotFoundException::new);
+                .orElseThrow(() -> new EntityNotFoundException("User not found"));
     }
 
     /**

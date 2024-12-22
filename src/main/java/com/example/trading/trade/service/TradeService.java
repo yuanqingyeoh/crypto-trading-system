@@ -8,6 +8,7 @@ import com.example.trading.price.service.CryptoPriceService;
 import com.example.trading.user.model.User;
 import com.example.trading.trade.repository.TradeRepository;
 import com.example.trading.user.service.UserService;
+import com.example.trading.util.TradeException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -52,11 +53,11 @@ public class TradeService {
      * @param makeTradeDTO      DTO containing trade information
      * @return                  Trade made
      */
-    public Trade makeTrade(MakeTradeDTO makeTradeDTO) {
+    public Trade makeTrade(MakeTradeDTO makeTradeDTO) throws TradeException {
         Optional<User> userOpt = this.userService.getUser(makeTradeDTO.getUserId());
 
         if (userOpt.isEmpty()) {
-            throw new EntityNotFoundException();
+            throw new EntityNotFoundException("User not found");
         }
         Trade trade = new Trade();
         trade.setUser(userOpt.get());
@@ -82,7 +83,7 @@ public class TradeService {
             BigDecimal total = price.getAskPrice().multiply(makeTradeDTO.getQuantity());
 
             if (pair2BalanceOpt.isEmpty()){
-                throw new RuntimeException("Insufficient " + pair2 + " Balance");
+                throw new TradeException("Insufficient " + pair2 + " Balance");
             }
 
             Balance pair2Balance = pair2BalanceOpt.get();
@@ -113,14 +114,14 @@ public class TradeService {
 
             } else {
                 // insufficient balance
-                throw new RuntimeException("Insufficient " + pair2 + " Balance");
+                throw new TradeException("Insufficient " + pair2 + " Balance");
             }
         } else {
 
             BigDecimal total = price.getBidPrice().multiply(makeTradeDTO.getQuantity());
 
             if (pair1BalanceOpt.isEmpty()){
-                throw new RuntimeException("Insufficient " + pair1 + " Balance");
+                throw new TradeException("Insufficient " + pair1 + " Balance");
             }
 
             Balance pair1Balance = pair1BalanceOpt.get();
@@ -151,7 +152,7 @@ public class TradeService {
 
             } else {
                 // insufficient balance
-                throw new RuntimeException("Insufficient " + pair1 + " Balance");
+                throw new TradeException("Insufficient " + pair1 + " Balance");
             }
         }
     }

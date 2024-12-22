@@ -31,6 +31,6 @@ public class CryptoPriceService {
      * @return          Price for the symbol else throw error
      */
     public CryptoPrice getSymbol(String symbol) {
-        return cryptoPriceRepository.findBySymbol(symbol).orElseThrow(EntityNotFoundException::new);
+        return cryptoPriceRepository.findBySymbol(symbol).orElseThrow(() -> new EntityNotFoundException("Price not found for the symbol."));
     }
 }

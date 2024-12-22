@@ -3,6 +3,7 @@ package com.example.trading.trade.resource;
 import com.example.trading.trade.dto.MakeTradeDTO;
 import com.example.trading.trade.model.Trade;
 import com.example.trading.trade.service.TradeService;
+import com.example.trading.util.TradeException;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,7 +44,7 @@ public class TradeResource {
      */
     @Operation(summary = "Make trade")
     @PostMapping("/makeTrade")
-    public ResponseEntity<Trade> makeTrade(MakeTradeDTO makeTradeDTO) {
+    public ResponseEntity<Trade> makeTrade(MakeTradeDTO makeTradeDTO) throws TradeException {
         return ResponseEntity.ok(tradeService.makeTrade(makeTradeDTO));
     }
 
