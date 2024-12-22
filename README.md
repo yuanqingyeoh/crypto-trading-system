@@ -16,3 +16,4 @@ TB_BALANCE -> Wallet balance for the user
 TB_TRADE -> Store trade made by user
 
 TB_CRYPTO_PRICE -> Store the latest aggregated price for each symbol
+
